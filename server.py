@@ -1,6 +1,6 @@
 # from FastMCP import MCPServer, tool
 from FabricAPI import upload_file_to_lakehouse, download_file_from_lakehouse, list_items,get_token_via_browser
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 import os
 # Tool for uploading a file to lakehouse
 app = FastMCP("FabricMCP")
