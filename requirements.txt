@@ -3,3 +3,4 @@ mcp==1.9.4
 uvicorn==0.34.0
 azure-identity==1.23.0
 azure-storage-file-datalake==12.20.0
+pandas==2.3.0
