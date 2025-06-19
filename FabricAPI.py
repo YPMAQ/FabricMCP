@@ -2,16 +2,16 @@ from azure.storage.filedatalake import DataLakeServiceClient
 from azure.identity import DefaultAzureCredential
 from io import BytesIO
 import pandas as pd
-from azure.identity import InteractiveBrowserCredential
+from azure.identity import DeviceCodeCredential
 
 def get_token_via_browser():
-    credential = InteractiveBrowserCredential()
+    credential = DeviceCodeCredential()
     token = credential.get_token("https://storage.azure.com/.default")
     return token.token
 
 def upload_file_to_lakehouse(account_name,WORKSPACE_NAME,local_file_path, lakehouse_file_path):
     account_url = f"https://{account_name}.dfs.fabric.microsoft.com"
-    token_credential = DefaultAzureCredential()
+    token_credential = DeviceCodeCredential()
     service_client = DataLakeServiceClient(account_url, credential=token_credential)
     file_system_client = service_client.get_file_system_client(WORKSPACE_NAME)
     file_client = file_system_client.get_file_client(lakehouse_file_path)
@@ -26,7 +26,7 @@ def upload_file_to_lakehouse(account_name,WORKSPACE_NAME,local_file_path, lakeho
 
 def download_file_from_lakehouse(ACCOUNT_NAME,WORKSPACE_NAME, lakehouse_file_path):
     account_url = f"https://{ACCOUNT_NAME}.dfs.fabric.microsoft.com"
-    token_credential = DefaultAzureCredential()
+    token_credential = DeviceCodeCredential()
     service_client = DataLakeServiceClient(account_url, credential=token_credential)
     file_system_client = service_client.get_file_system_client(WORKSPACE_NAME)
     
@@ -41,7 +41,7 @@ def download_file_from_lakehouse(ACCOUNT_NAME,WORKSPACE_NAME, lakehouse_file_pat
 
 def upload_logfile_to_lakehouse(account_name, WORKSPACE_NAME, lakehouse_file_path, file_bytes=None):
     account_url = f"https://{account_name}.dfs.fabric.microsoft.com"
-    token_credential = DefaultAzureCredential()
+    token_credential = DeviceCodeCredential()
     service_client = DataLakeServiceClient(account_url, credential=token_credential)
     file_system_client = service_client.get_file_system_client(WORKSPACE_NAME)
     file_client = file_system_client.get_file_client(lakehouse_file_path)
@@ -56,7 +56,7 @@ def list_items(ACCOUNT_NAME,WORKSPACE_NAME,DATA_PATH):
 
     account_url = f"https://{ACCOUNT_NAME}.dfs.fabric.microsoft.com"
     # token_credential = DefaultAzureCredential()
-    token_credential = InteractiveBrowserCredential()
+    token_credential = DeviceCodeCredential()
     service_client = DataLakeServiceClient(account_url, credential=token_credential)
 
     #Create a file system client for the workspace
