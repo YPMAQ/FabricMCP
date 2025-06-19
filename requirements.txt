@@ -1,0 +1,5 @@
+fastmcp==2.5.1
+mcp==1.9.4
+uvicorn==0.34.0
+azure-identity==1.23.0
+azure-storage-file-datalake==12.20.0
